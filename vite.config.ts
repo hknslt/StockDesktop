@@ -8,8 +8,14 @@ export default defineConfig({
   base: './',
   plugins: [
     react(),
-    // İçindeki spesifik listeyi sildik, hepsini otomatik halletsin:
-    nodePolyfills(),
+    // Burayı güncelliyoruz: Electron'un process objesini ezmesini engelliyoruz
+    nodePolyfills({
+      globals: {
+        Buffer: true,
+        global: true,
+        process: false, 
+      },
+    }),
     electron({
       main: {
         entry: 'electron/main.ts',
