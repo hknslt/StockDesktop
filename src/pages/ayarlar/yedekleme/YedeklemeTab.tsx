@@ -99,7 +99,7 @@ export default function YedeklemeTab() {
         return;
       }
       const snap = await getDocs(collection(veritabani, etkinYol));
-      const rows = snap.docs.map((d) => ({ ...d.data(), docId: d.id })); 
+      const rows = snap.docs.map((d) => ({ ...d.data(), docId: d.id }));
       setTumSatirlar(rows);
 
       const keys = new Set<string>();
@@ -122,7 +122,7 @@ export default function YedeklemeTab() {
 
   function filtreliFlatRows() {
     const selected = seciliAlanlar.size ? Array.from(seciliAlanlar) : alanlar;
-    const keys = Array.from(new Set([...selected])); 
+    const keys = Array.from(new Set([...selected]));
     const out: Record<string, any>[] = [];
     for (const r of tumSatirlar) {
       const flat = flatten(r);
@@ -139,7 +139,7 @@ export default function YedeklemeTab() {
     }
     try {
       setYuk("json");
-      const safe = tumSatirlar.map((r) => serializeForBackup(r)); 
+      const safe = tumSatirlar.map((r) => serializeForBackup(r));
 
       const fname =
         manualFileName || `${safeName(etkinYol)}__${fmtTime(new Date())}.json`;
@@ -192,7 +192,8 @@ export default function YedeklemeTab() {
     }
     try {
       setYuk("xlsx");
-      const xlsx: any = await import("xlsx");
+      // "xlsx" YERİNE "xlsx-js-style" OLARAK GÜNCELLENDİ:
+      const xlsx: any = await import("xlsx-js-style");
 
       const rows = filtreliFlatRows();
       const headers = Array.from(new Set([...seciliAlanlar]));

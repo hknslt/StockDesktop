@@ -2,11 +2,14 @@ import { defineConfig } from 'vite'
 import path from 'node:path'
 import electron from 'vite-plugin-electron/simple'
 import react from '@vitejs/plugin-react'
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 export default defineConfig({
-  base: './', 
+  base: './',
   plugins: [
     react(),
+    // İçindeki spesifik listeyi sildik, hepsini otomatik halletsin:
+    nodePolyfills(),
     electron({
       main: {
         entry: 'electron/main.ts',

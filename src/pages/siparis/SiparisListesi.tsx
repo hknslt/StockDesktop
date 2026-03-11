@@ -11,6 +11,7 @@ import {
 } from "../../services/SiparisService";
 import { Link, useNavigate } from "react-router-dom";
 import { teklifPdfYazdirWeb } from "../../pdf/teklifPdf";
+import { siparisleriExceleAktar } from "../../excel/siparisExcel";
 import { collection, onSnapshot } from "firebase/firestore";
 import { veritabani } from "../../firebase";
 
@@ -286,6 +287,14 @@ export default function SiparisListesi() {
           {liste.length.toLocaleString()} kayıt • Brüt: <b>{fmtTL(toplamBrut)}</b>
         </div>
         <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
+          <button
+            className="theme-btn"
+            style={{ background: "#107c41", color: "white" }}
+            onClick={() => siparisleriExceleAktar(liste, musteriMap, ETIKET)}
+            title="Filtrelenmiş siparişleri Excel olarak indir"
+          >
+            Excel'e Aktar
+          </button>
           <Link to="/siparis/uretim-ihtiyac">
             <button className="theme-btn" style={{ background: "var(--yesil)", color: "white" }}>
               Üretim İhtiyaç Listesi
@@ -293,7 +302,7 @@ export default function SiparisListesi() {
           </Link>
           <Link to="/siparis/yeni"><button>+ Yeni Sipariş</button></Link>
         </div>
-      </div>
+      </div>    
 
       {/* Filtre barı */}
       <div className="card" style={{ display: "grid", gap: 10 }}>
