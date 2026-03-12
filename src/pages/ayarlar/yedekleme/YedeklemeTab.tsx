@@ -192,8 +192,7 @@ export default function YedeklemeTab() {
     }
     try {
       setYuk("xlsx");
-      // "xlsx" YERİNE "xlsx-js-style" OLARAK GÜNCELLENDİ:
-      const xlsx: any = await import("xlsx-js-style");
+      const xlsx = (window as any).XLSX;
 
       const rows = filtreliFlatRows();
       const headers = Array.from(new Set([...seciliAlanlar]));

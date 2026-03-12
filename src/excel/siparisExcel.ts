@@ -1,4 +1,4 @@
-import * as XLSX from "xlsx-js-style";
+
 
 /* Timestamp | Date | number -> string formata çevirmek için yardımcı fonksiyon */
 function formatlaTarih(v: any): string {
@@ -16,6 +16,8 @@ export function siparisleriExceleAktar(
     musteriMap: Record<string, any>,
     etiketMap: Record<string, string>
 ) {
+
+    const XLSX = (window as any).XLSX;
     const veri: any[][] = [];
 
     // --- STİL TANIMLAMALARI ---

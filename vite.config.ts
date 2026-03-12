@@ -2,20 +2,11 @@ import { defineConfig } from 'vite'
 import path from 'node:path'
 import electron from 'vite-plugin-electron/simple'
 import react from '@vitejs/plugin-react'
-import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 export default defineConfig({
   base: './',
   plugins: [
     react(),
-    // Burayı güncelliyoruz: Electron'un process objesini ezmesini engelliyoruz
-    nodePolyfills({
-      globals: {
-        Buffer: true,
-        global: true,
-        process: false, 
-      },
-    }),
     electron({
       main: {
         entry: 'electron/main.ts',
@@ -23,9 +14,7 @@ export default defineConfig({
       preload: {
         input: path.join(__dirname, 'electron/preload.ts'),
       },
-      renderer: process.env.NODE_ENV === 'test'
-        ? undefined
-        : {},
+      renderer: process.env.NODE_ENV === 'test' ? undefined : {},
     }),
   ],
 })
